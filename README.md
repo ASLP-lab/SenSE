@@ -34,9 +34,9 @@ conda activate sense
 ```bash
 accelerate launch src/sense/eval/eval_infer_batch.py \
     --seed 0 \
-    --llm_model SenSE_LLM_Base_whisper \
+    --llm_model SenSE_LLM_Base \
     --llm_ckpt_file "/path/to/llm_ckpt" \
-    --fm_model U3SE_CFM_Base \
+    --fm_model SenSE_CFM_Base \
     --fm_ckpt_file "/path/to/cfm_ckpt" \
     --exp_name evaluation \
     --save_sample_rate 16000 \
