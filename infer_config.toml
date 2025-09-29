@@ -1,0 +1,7 @@
+# SenSE_Base
+llm_model = "SenSE_LLM_Base"
+fm_model = "SenSE_CFM_Base"
+ref_audio = "infer/examples/enhancement/clean_ref.wav"
+noisy_ref_audio = "src/sense/infer/examples/enhancement/noisy.wav"
+output_dir = "tests"
+output_file = "infer_enhancement.wav"

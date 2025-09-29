@@ -1,0 +1,55 @@
+hydra:
+  run:
+    dir: hydra/${model.name}_${model.mel_spec.mel_spec_type}_${model.tokenizer}_${datasets.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+datasets:
+  name: # dataset name
+    - Emilia_ZH_EN_degrad_v3_node55
+  batch_size_per_gpu: 9600  # 8 GPUs, 8 * 38400 = 307200
+  batch_size_type: frame  # frame | sample
+  max_samples: 16  # max sequences per batch if use frame-wise batch_size. we set 32 for small models, 64 for base models
+  num_workers: 16
+  pad: False
+  add_eos_token: True
+  eos_token: 4098
+
+optim:
+  epochs: 10
+  learning_rate: 7.5e-5
+  num_warmup_updates: 20000  # warmup updates
+  grad_accumulation_steps: 1  # note: updates = steps / grad_accumulation_steps
+  max_grad_norm: 1.0  # gradient clipping
+  bnb_optimizer: False  # use bnb 8bit AdamW optimizer or not
+
+model:
+  name: SenSE_LLM_Base  # model name
+  tokenizer: s3tokenizer_v1_50hz  # tokenizer type
+  tokenizer_path: null  # if 'custom' tokenizer, define the path want to use (should be vocab.txt)
+  backbone: LLM_LLaMA
+  arch:
+    encoder_name: whisper
+    freeze_encoder: True
+    encoder_output_dim: 1280
+    projector_name: linear
+    d_model: 768
+    nhead: 16
+    num_layers: 20
+    vocab_size: 4096
+  mel_spec:
+    target_sample_rate: 16000
+    n_mel_channels: 80
+    hop_length: 160
+    win_length: 400
+    n_fft: 400
+    mel_spec_type: whisper  # vocos | bigvgan
+  vocoder:
+    is_local: True  # use local offline ckpt or not
+    local_path: src/sense/checkpoints/vocos-mel-24khz  # local vocoder path
+
+ckpts:
+  logger: null # wandb | tensorboard | null
+  log_samples: True  # infer random sample per save checkpoint. wip, normal to fail with extra long samples
+  save_per_updates: 50000  # save checkpoint per updates
+  keep_last_n_checkpoints: -1  # -1 to keep all, 0 to not save intermediate, > 0 to keep last N checkpoints
+  last_per_updates: 2000  # save last checkpoint per updates
+  save_dir: ckpts/${model.name}_${model.mel_spec.mel_spec_type}_${model.tokenizer}_${datasets.name}
