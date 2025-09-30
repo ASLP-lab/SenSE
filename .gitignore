@@ -14,8 +14,8 @@ eval/dnsmos/
 eval/NISQA/
 eval/pt-models/
 eval/SpeechBERTScore
-src/model/vocoder/BigVGAN/
-src/model/vocoder/BigVGAN_qwen/
+src/sense/model/vocoder/BigVGAN
+src/sense/model/vocoder/BigVGAN_qwen
 eval_infer_batch.sh
 train.sh
 eval_metrics.sh
