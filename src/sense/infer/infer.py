@@ -174,11 +174,6 @@ def main():
         mel_spec_type=fm_mel_spec_cfg.mel_spec_type,
     ).to(device)
 
-    noisy_audio_wav, sr = torchaudio.load(noisy_audio)
-    resampler = torchaudio.transforms.Resample(sr, llm_mel_spec_cfg.target_sample_rate)
-    noisy_audio_wav = resampler(noisy_audio_wav)[0].to(device)
-    noisy_audio_wav = noisy_audio_wav[22*16000:]
-
     mels = wav_to_llm_mel(noisy_audio_wav.unsqueeze(0))
     mels = mels.permute(0, 2, 1).half()
     mels_len = torch.LongTensor([mels.shape[1]])
@@ -194,9 +189,6 @@ def main():
         resampler = torchaudio.transforms.Resample(sr, fm_mel_spec_cfg.target_sample_rate)
         ref_audio_wav_fm = resampler(ref_audio_wav_fm)
         noisy_audio_wav_fm = resampler(noisy_audio_wav_fm)
-
-        ref_audio_wav_fm = ref_audio_wav_fm[:, 22*24000:]
-        noisy_audio_wav_fm = noisy_audio_wav_fm[:, 22*24000:]
 
     ref_audio_wav_fm = ref_audio_wav_fm[0].to(device)
     noisy_audio_wav_fm = noisy_audio_wav_fm[0].to(device)
