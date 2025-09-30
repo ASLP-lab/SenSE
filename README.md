@@ -1,6 +1,8 @@
 # SenSE: Semantic-Aware High-Fidelity Universal Speech Enhancement
 
+[![arXiv](https://img.shields.io/badge/arXiv-2410.06885-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2509.24708)
 [![demo](https://img.shields.io/badge/GitHub-Demo%20page-orange.svg)](https://stellanli.github.io/SenSE-demo/)
+[![hfspace](https://img.shields.io/badge/🤗-Space%20demo-yellow)](https://huggingface.co/ASLP-lab/SenSE)
 
 ## Installation
 
