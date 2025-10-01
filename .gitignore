@@ -10,10 +10,10 @@ results/
 checkpoints/
 pt-models/
 tools/
-eval/dnsmos/
-eval/NISQA/
-eval/pt-models/
-eval/SpeechBERTScore
+src/sense/eval/dnsmos/
+src/sense/eval/NISQA/
+src/sense/eval/pt-models/
+src/sense/eval/SpeechBERTScore
 src/sense/model/vocoder/BigVGAN
 src/sense/model/vocoder/BigVGAN_qwen
 eval_infer_batch.sh
