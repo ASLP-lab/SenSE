@@ -5,7 +5,7 @@
 [![hfspace](https://img.shields.io/badge/🤗-HF%20Space-yellow)](https://huggingface.co/ASLP-lab/SenSE)
 
 <p align="center">
-    <img src="figures/sense.png" width="600"/>
+    <img src="figures/sense.png" width="900"/>
 <p>
 
 ## Installation
