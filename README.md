@@ -67,3 +67,12 @@ accelerate launch src/sense/train/train_llm.py \
 accelerate launch src/sense/train/train.py \
     --config-name SenSE_CFM_Base.yaml
 ```
+
+## Contact Us
+
+If you are interested in leaving a message to our research team, feel free to email `lixingchen0126@gmail.com`.
+<p align="center">
+    <a href="http://www.nwpu-aslp.org/">
+        <img src="figures/ASLP.jpg" width="400"/>
+    </a>
+</p>
