@@ -37,6 +37,9 @@ pip install -e .
 
 ## Inference
 
+Please read the [Inference Guidance](https://github.com/ASLP-lab/SenSE/blob/main/src/sense/infer/REAMD.md)
+ before running the inference code to ensure correct results.
+
 Our models are available at https://huggingface.co/ASLP-lab/SenSE.
 
 ```bash
