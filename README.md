@@ -2,7 +2,7 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2410.06885-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2509.24708)
 [![demo](https://img.shields.io/badge/GitHub-Demo%20page-orange.svg)](https://stellanli.github.io/SenSE-demo/)
-[![hfspace](https://img.shields.io/badge/🤗-HF%20Space-yellow)](https://huggingface.co/ASLP-lab/SenSE)
+[![models](https://img.shields.io/badge/🤗-HF%20Space-yellow)](https://huggingface.co/ASLP-lab/SenSE)
 
 <p align="center">
     <img src="figures/SenSE.png" width="900"/>
@@ -87,6 +87,8 @@ If you find this work useful, please cite our paper:
 ## Acknowledgements
 
 We sincerely thank all collaborators and Prof. [Shuai Wang](https://github.com/wsstriving) for their valuable contributions to this work and the accompanying paper.
+
+In addition, this implementation is based on [F5-TTS](https://github.com/SWivid/F5-TTS). We appreciae their excellent work.
 
 ## Contact Us
 
