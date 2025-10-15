@@ -6,7 +6,7 @@ from importlib.resources import files
 import hydra
 from omegaconf import OmegaConf
 
-from sense.model import CFM, Trainer
+from sense.model import CFM, Trainer_cfm
 from sense.model.dataset import load_dataset
 from sense.model.utils import get_tokenizer
 

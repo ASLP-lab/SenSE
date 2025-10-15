@@ -18,10 +18,9 @@ import s3tokenizer
 
 from sense.eval.utils_eval import (
     get_inference_prompt,
-    get_librispeech_test_clean_metainfo,
-    get_seedtts_testset_metainfo,
-    get_dns_challenge_metainfo,
-    get_dns_challenge_rc_metainfo
+    get_metainfo_w_prompt,
+    get_metainfo_wo_prompt,
+    get_audio_files
 )
 from sense.infer.utils_infer import (
     load_checkpoint,
@@ -53,6 +52,8 @@ def main():
     parser.add_argument("--swaysampling", default=-1, type=float)
 
     parser.add_argument("--testset", required=True)
+    parser.add_argument("--test_dir", default=None, type=str, help="Path to custom test set directory, required if testset is custom")
+    parser.add_argument("--prompt_dir", default=None, type=str, help="Path to custom prompt directory, required if testset is custom")
     parser.add_argument("--no_ref_audio", action="store_true", help="To denoise without reference audio, default to False")
     parser.add_argument("--no_noisy_audio", action="store_true", help="To use TTS(token to speech) mode, default to False")
     parser.add_argument("--no_token", action="store_true", help="To ignore the token prompt, default to False")
@@ -98,31 +99,36 @@ def main():
 
     if testset == "dns_challenge_no_reverb":
         metalst = rel_path + "/test_dataset/dns_challenge/no_reverb/no_reverb_prompt.scp"
-        metainfo = get_dns_challenge_metainfo(metalst)
+        metainfo = get_metainfo_w_prompt(metalst)
     
     elif testset == "dns_challenge_with_reverb":
         metalst = rel_path + "/test_dataset/dns_challenge/with_reverb/with_reverb_meta.lst"
-        metainfo = get_dns_challenge_metainfo(metalst)
+        metainfo = get_metainfo_w_prompt(metalst)
     
     elif testset == "dns_challenge_real_recordings":
         metalst = rel_path + "/test_dataset/dns_challenge/real_recordings/noisy.scp"
-        metainfo = get_dns_challenge_rc_metainfo(metalst)
+        metainfo = get_metainfo_wo_prompt(metalst)
     
     elif testset == "dns_challenge_hardset":
         metalst = rel_path + "/test_dataset/dns_challenge/hardset/hardset_prompt.scp"
-        metainfo = get_dns_challenge_metainfo(metalst)
+        metainfo = get_metainfo_w_prompt(metalst)
     
     elif testset == "dns_challenge_gsr":
         metalst = rel_path + "/test_dataset/dns_challenge/gsr/dns_challenge_gsr_prompt.scp"
-        metainfo = get_dns_challenge_metainfo(metalst)
+        metainfo = get_metainfo_w_prompt(metalst)
     
     elif testset == "vctk_gsr":
         metalst = rel_path + "/test_dataset/VCTK/vctk_16k_meta.scp"
-        metainfo = get_dns_challenge_metainfo(metalst)
+        metainfo = get_metainfo_w_prompt(metalst)
     
     elif testset == "urgent26":
         metalst = rel_path + "/test_dataset/urgent26/noisy_debug.scp"
-        metainfo = get_dns_challenge_rc_metainfo(metalst)
+        metainfo = get_metainfo_wo_prompt(metalst)
+    
+    elif testset == "custom":
+        test_dir = getattr(args, 'test_dir', None)
+        prompt_dir = getattr(args, 'prompt_dir', None)
+        metainfo = get_audio_files(test_dir, prompt_dir)
 
     # path to save genereted wavs
 

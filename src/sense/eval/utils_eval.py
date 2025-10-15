@@ -17,46 +17,7 @@ from sense.model.utils import convert_char_to_pinyin
 from typing import List, Optional, Tuple
 import wespeaker
 
-# seedtts testset metainfo: utt, prompt_text, prompt_wav, gt_text, gt_wav
-def get_seedtts_testset_metainfo(metalst):
-    f = open(metalst)
-    lines = f.readlines()
-    f.close()
-    metainfo = []
-    for line in lines:
-        if len(line.strip().split("|")) == 5:
-            utt, prompt_text, prompt_wav, gt_text, gt_wav = line.strip().split("|")
-        elif len(line.strip().split("|")) == 4:
-            utt, prompt_text, prompt_wav, gt_text = line.strip().split("|")
-            gt_wav = os.path.join(os.path.dirname(metalst), "wavs", utt + ".wav")
-        if not os.path.isabs(prompt_wav):
-            prompt_wav = os.path.join(os.path.dirname(metalst), prompt_wav)
-        metainfo.append((utt, prompt_text, prompt_wav, gt_text, gt_wav))
-    return metainfo
-
-
-# librispeech test-clean metainfo: gen_utt, ref_txt, ref_wav, gen_txt, gen_wav
-def get_librispeech_test_clean_metainfo(metalst, librispeech_test_clean_path):
-    f = open(metalst)
-    lines = f.readlines()
-    f.close()
-    metainfo = []
-    for line in lines:
-        ref_utt, ref_dur, ref_txt, gen_utt, gen_dur, gen_txt = line.strip().split("\t")
-
-        # ref_txt = ref_txt[0] + ref_txt[1:].lower() + '.'  # if use librispeech test-clean (no-pc)
-        ref_spk_id, ref_chaptr_id, _ = ref_utt.split("-")
-        ref_wav = os.path.join(librispeech_test_clean_path, ref_spk_id, ref_chaptr_id, ref_utt + ".flac")
-
-        # gen_txt = gen_txt[0] + gen_txt[1:].lower() + '.'  # if use librispeech test-clean (no-pc)
-        gen_spk_id, gen_chaptr_id, _ = gen_utt.split("-")
-        gen_wav = os.path.join(librispeech_test_clean_path, gen_spk_id, gen_chaptr_id, gen_utt + ".flac")
-
-        metainfo.append((gen_utt, ref_txt, ref_wav, " " + gen_txt, gen_wav))
-
-    return metainfo
-
-def get_dns_challenge_metainfo(metalst):
+def get_metainfo_w_prompt(metalst):
     f = open(metalst)
     lines = f.readlines()
     f.close()
@@ -66,7 +27,7 @@ def get_dns_challenge_metainfo(metalst):
         metainfo.append((utt, prompt_wav, noisy_wav))
     return metainfo
 
-def get_dns_challenge_rc_metainfo(metalst):
+def get_metainfo_wo_prompt(metalst):
     f = open(metalst)
     lines = f.readlines()
     f.close()
@@ -74,6 +35,43 @@ def get_dns_challenge_rc_metainfo(metalst):
     for line in lines:
         utt, noisy_wav = line.strip().split(" ")
         metainfo.append((utt, noisy_wav, noisy_wav))
+    return metainfo
+
+def get_audio_files(custom_dir, prompt_dir=None):
+    import glob
+
+    if not custom_dir or not os.path.exists(custom_dir):
+        raise ValueError(f"Custom directory not specified or does not exist: {custom_dir}")
+    
+    audio_extensions = ['*.wav', '*.mp3', '*.flac', '*.ogg', '*.m4a']
+    degraded_files = []
+    for ext in audio_extensions:
+        degraded_files.extend(glob.glob(os.path.join(custom_dir, ext)))
+    
+    if not degraded_files:
+        raise ValueError(f"No audio files found in {custom_dir}")
+    
+    metainfo = []
+    for degraded_path in sorted(degraded_files):
+        filename = os.path.basename(degraded_path)
+        file_id = os.path.splitext(filename)[0]
+        
+        if prompt_dir and os.path.exists(prompt_dir):
+            prompt_path = None
+            for ext in audio_extensions:
+                potential_path = os.path.join(prompt_dir, file_id + os.path.splitext(ext)[1])
+                if os.path.exists(potential_path):
+                    prompt_path = potential_path
+                    break
+            
+            if prompt_path is None:
+                print(f"Warning: No matching prompt file found for {filename} in {prompt_dir}, using degraded file as prompt")
+                prompt_path = degraded_path
+        else:
+            prompt_path = degraded_path
+        
+        metainfo.append((file_id, prompt_path, degraded_path))
+    
     return metainfo
 
 # padded to max length mel batch

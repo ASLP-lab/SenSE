@@ -9,7 +9,7 @@ from sense.model.encoder.conformer.encoder2 import ConformerEncoder
 from sense.model.encoder.encoder_wrapper import setup_encoder
 from sense.model.projector_wrapper import setup_encoder_projector
 
-"envs/sense/lib/python3.10/site-packages/whisper/model.py"
+# "envs/sense/lib/python3.10/site-packages/whisper/model.py"
 ENCODER_PATH = {
     "whisper": "src/sense/checkpoints/whisper/large-v3.pt",
     "wavlm": "src/sense/checkpoints/WavLM-Large/WavLM-Large.pt"

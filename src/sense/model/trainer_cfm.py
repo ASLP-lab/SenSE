@@ -23,7 +23,7 @@ from sense.model.utils import default, exists
 # trainer
 
 
-class Trainer:
+class Trainer_CFM:
     def __init__(
         self,
         model: CFM,

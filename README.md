@@ -68,6 +68,23 @@ accelerate launch src/sense/train/train.py \
     --config-name SenSE_CFM_Base.yaml
 ```
 
+## Citation
+
+If you find this work useful, please cite our paper:
+
+```bibtex
+@article{li2025sense,
+  title={SenSE: Semantic-Aware High-Fidelity Universal Speech Enhancement},
+  author={Li, Xingchen and Xie, Hanke and Wang, Ziqian and Zhang, Zihan and Xiao, Longshuai and Xie, Lei},
+  journal={arXiv preprint arXiv:2509.24708},
+  year={2025}
+}
+```
+
+## Acknowledgements
+
+We sincerely thank all collaborators and Prof. [Shuai Wang](https://github.com/wsstriving) for their valuable contributions to this work and the accompanying paper.
+
 ## Contact Us
 
 If you are interested in leaving a message to our research team, feel free to email `lixingchen0126@gmail.com`.

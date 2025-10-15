@@ -16,7 +16,7 @@ from torch.utils.data import DataLoader, Dataset, SequentialSampler
 from tqdm import tqdm
 from typing import List, Optional, Tuple
 
-from sense.model import SASLM
+from sense.model import LLM_LLaMA
 from sense.model.dataset import DynamicBatchSampler, collate_fn
 from sense.model.utils import default, exists
 
@@ -25,7 +25,7 @@ from sense.model.utils import default, exists
 class Trainer_LLM:
     def __init__(
         self,
-        model: SASLM,
+        model: LLM_LLaMA,
         epochs,
         learning_rate,
         num_warmup_updates=20000,
