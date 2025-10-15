@@ -2,7 +2,7 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2410.06885-b31b1b.svg?logo=arXiv)](https://arxiv.org/abs/2509.24708)
 [![demo](https://img.shields.io/badge/GitHub-Demo%20page-orange.svg)](https://stellanli.github.io/SenSE-demo/)
-[![models](https://img.shields.io/badge/🤗-HF%20Space-yellow)](https://huggingface.co/ASLP-lab/SenSE)
+[![models](https://img.shields.io/badge/🤗-Models-yellow)](https://huggingface.co/ASLP-lab/SenSE)
 
 <p align="center">
     <img src="figures/SenSE.png" width="900"/>
