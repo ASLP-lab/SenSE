@@ -20,7 +20,7 @@ class LayerNorm(nn.LayerNorm):
 ```
 
 Modified implementation:
-```
+```python
 class LayerNorm(nn.LayerNorm):
     def forward(self, x: Tensor) -> Tensor:
         return F.layer_norm(
