@@ -88,7 +88,7 @@ If you find this work useful, please cite our paper:
 
 We sincerely thank all collaborators and Prof. [Shuai Wang](https://github.com/wsstriving) for their valuable contributions to this work and the accompanying paper.
 
-In addition, this implementation is based on [F5-TTS](https://github.com/SWivid/F5-TTS). We appreciae their excellent work.
+In addition, this implementation is based on [F5-TTS](https://github.com/SWivid/F5-TTS). We appreciate their excellent work.
 
 ## Contact Us
 
