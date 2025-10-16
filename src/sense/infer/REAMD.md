@@ -32,6 +32,8 @@ class LayerNorm(nn.LayerNorm):
         ).type(x.dtype)
 ```
 
+### Vocoder Download
+
 We use the open-source BigVGAN model as our vocoder. Please read the vocoder section’s [guidance](https://github.com/ASLP-lab/SenSE/blob/main/src/sense/model/vocoder/README.md) first to ensure correct inference.
 
 ### Batch Inference
