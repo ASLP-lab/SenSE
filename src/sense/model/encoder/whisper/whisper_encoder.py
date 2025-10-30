@@ -29,7 +29,12 @@ class WhisperWrappedEncoder:
             x = self.ln_post(x)
             return x
 
-        encoder = whisper.load_model(name=model_path, device='cpu').encoder
+        # encoder = whisper.load_model(name=model_path, device='cpu').encoder
+        import os
+        if os.path.isfile(model_path):
+            encoder = whisper.load_model(name=model_path, device='cpu').encoder
+        else:
+            encoder = whisper.load_model(name="large-v3", device='cpu', download_root=None).encoder
         encoder.extract_variable_length_features = types.MethodType(extract_variable_length_features, encoder)
         return encoder
 
