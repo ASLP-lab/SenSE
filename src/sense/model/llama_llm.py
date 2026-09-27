@@ -94,7 +94,7 @@ class LLM_LLaMA(nn.Module):
         # for param in self.llama.parameters():
         #     param.requires_grad = False
         # self.llama.eval()
-        self.top5 = Accuracy(task="multiclass", num_classes=self.vocab_size + 3, top_k=5)
+        self.top5 = Accuracy(task="multiclass", num_classes=self.vocab_size, top_k=5)
 
     def forward(self, mels, mels_len, speech_tokens, speech_tokens_lengths, wavs=None, wavs_len=None):
         device = mels.device
